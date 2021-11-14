@@ -1,48 +1,42 @@
 package programmers.leveltwo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class ParenthesisRotation {
 
     public static void main(String[] args) {
-        String s = "[](){}";
-        solution(s);
+        String s = 	"[](){}";
+        int solution = solution(s);
+        System.out.println(solution);
     }
 
     public static int solution(String s) {
-        int answer = -1;
-        int count = 0;
+        Queue<String> queue = new LinkedList<>();
+        Stack<String> stack = new Stack<>();
         String[] strArr = s.split("");
-
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < strArr.length; i++) {
-            list.add(strArr[i]);
+        for (String s1 : strArr) {
+            queue.add(s1);
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < list.size(); j++) {
-                String str = list.get(j);
-                if (str.equals("(") || str.equals("{") || str.equals("[")) {
-                    count ++;
-                } else {
-                    count --;
-                }
-                if (count < 0) {
-                    break;
+        int answer = 0;
+        for (int i = 0; i < queue.size(); i++) {
+            for (String s1 : queue) {
+                if (stack.size() == 0) stack.add(s1);
+                else {
+                    String peek = stack.peek();
+                    if ((peek.equals("[") && s1.equals("]")) || (peek.equals("{") && s1.equals("}")) || (peek.equals("(") && s1.equals(")"))) {
+                        stack.pop();
+                    } else {
+                        stack.add(s1);
+                    }
                 }
             }
-
-            if (count == 0) {
-                answer ++;
-            }
-
-            String str = list.get(0);
-            list.remove(0);
-            list.add(str);
-            count = 0;
+            if (stack.size() == 0) answer++;
+            String poll = queue.poll();
+            queue.add(poll);
         }
-
         return answer;
     }
 }
