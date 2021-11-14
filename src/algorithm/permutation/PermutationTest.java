@@ -1,4 +1,4 @@
-package baekjoon.backtracking.permutation;
+package algorithm.permutation;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,6 +8,10 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+/**
+ * 백트래킹을 사용한 순열 알고리즘
+ */
 
 public class PermutationTest {
 
