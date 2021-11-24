@@ -61,5 +61,4 @@ public class Baekjoon10819 {
         }
         list.add(sum);
     }
-
 }
