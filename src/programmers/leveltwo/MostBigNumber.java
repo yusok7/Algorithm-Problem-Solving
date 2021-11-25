@@ -1,64 +1,28 @@
 package programmers.leveltwo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-/**
- * https://programmers.co.kr/learn/courses/30/lessons/42746?language=java
- */
+import java.util.Arrays;
 
 public class MostBigNumber {
 
-    public static int m = 0;
-    public static int[] arr;
-    public static boolean[] visit;
-    public static List<int[]> list = new ArrayList<>();
+    public StringBuilder sb = new StringBuilder();
 
     public String solution(int[] numbers) {
-
-        List<Integer> result = new ArrayList<>();
-
-        m = numbers.length;
-        arr = new int[m];
-        visit = new boolean[m];
-
-        dfs(m,m,0);
-
-        for (int[] array : list) {
-            String str = "";
-            for (int i : array) {
-                str += numbers[i];
-            }
-            if (str.startsWith("0")) {
-                continue;
-            } else {
-                result.add(Integer.parseInt(str));
-            }
+        String[] strArr = new String[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            strArr[i] = String.valueOf(numbers[i]);
         }
 
-        Collections.sort(result);
-        String answer = String.valueOf(Collections.max(result));
-        return answer;
-    }
+        /**
+         *  이 부분이 문제의 핵심 (정렬)
+         */
+        Arrays.sort(strArr, (String o1, String o2) -> {
+            return (o2+o1).compareTo(o1+o2);
+        });
 
-    public void dfs(int n, int m, int depth) {
-        // 종료조건
-        if (depth == m) {
-            int[] output = new int[m];
-            for (int i = 0; i < m; i++) {
-                output[i] = arr[i];
-            }
-            list.add(output);
-            return;
+        for (String val : strArr) {
+            sb.append(val);
         }
-        for (int i = 0; i < n; i++) {
-            if(!visit[i]) {
-                visit[i] = true;
-                arr[depth] = i;
-                dfs(n, m, depth+1);
-                visit[i] = false;
-            }
-        }
+        if (sb.toString().startsWith("0")) return "0";
+        return sb.toString();
     }
 }
