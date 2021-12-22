@@ -1,4 +1,4 @@
-package matchhere.day1;
+package matchhere.d1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
