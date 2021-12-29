@@ -18,9 +18,8 @@ public class Baekjoon2164 {
             queue.add(i);
         }
 
-        while (true) {
+        while (queue.size() > 1) {
             queue.poll();
-            if (queue.size() == 1) break;
             Integer poll = queue.poll();
             queue.add(poll);
         }
