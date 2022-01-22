@@ -7,6 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+/**
+ * 해당 문제는 자바의 Arrays.binarySearch(~, ~) 를 통해서도 풀 수 있다.
+ * 백준에 binarySearch를 사용해 정답을 확인한 결과
+ * 1. 해시를 사용한 검색과
+ * 2.이분탐색을 사용한 검색
+ * 간에 큰 차이는 없었고
+ *
+ * 근소한 차이로 해시를 사용한 검색이 시간이 적게 들었다
+ */
+
 public class Baekjoon1920 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
