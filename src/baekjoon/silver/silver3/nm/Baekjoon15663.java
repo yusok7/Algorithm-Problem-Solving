@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.StringTokenizer;
 
-public class Baekjoon15563 {
+public class Baekjoon15663 {
 
     private static int n, m;
     private static int[] arr;
