@@ -7,6 +7,10 @@ import java.util.StringTokenizer;
 
 public class Baekjoon1182 {
 
+    /**
+     * 원소 n개를 가진 집합의 부분집합의 개수는 2^n 이다.
+     */
+
     private static int n, s;
     private static int[] arr;
     private static int result = 0;
@@ -34,7 +38,7 @@ public class Baekjoon1182 {
             if (sum == s) result++;
             return;
         }
-        backtracking(cur + 1, sum);
-        backtracking(cur + 1, sum + arr[cur]);
+        backtracking(cur + 1, sum); // 현재 index에 해당하는 원소를 더하지 않고
+        backtracking(cur + 1, sum + arr[cur]); // 현재 index에 해당하는 원소를 더하고
     }
 }
