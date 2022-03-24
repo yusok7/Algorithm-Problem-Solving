@@ -7,48 +7,53 @@ import java.util.StringTokenizer;
 
 public class Baekjoon11504 {
 
+    private static int[] arr;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int testCase = Integer.valueOf(br.readLine());
+        int testCase = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < testCase; i++) {
+            int answer = 0;
             StringTokenizer st = new StringTokenizer(br.readLine());
             int n = Integer.parseInt(st.nextToken());
             int m = Integer.parseInt(st.nextToken());
-            int[] arr = new int[n];
+            arr = new int[n];
 
-            StringBuilder sb = new StringBuilder();
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < m; j++)
+            StringBuilder sb = new StringBuilder();
+            while (st.hasMoreTokens())
                 sb.append(st.nextToken());
             int x = Integer.parseInt(sb.toString());
-            sb.setLength(0);
 
+            sb.setLength(0);
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < m; j++)
+            while (st.hasMoreTokens())
                 sb.append(st.nextToken());
             int y = Integer.parseInt(sb.toString());
-            sb.setLength(0);
 
+            int index = 0;
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < n; j++)
-                arr[j] = Integer.parseInt(st.nextToken());
+            while (st.hasMoreTokens())
+                arr[index++] = Integer.parseInt(st.nextToken());
 
-            int result = 0;
             for (int j = 0; j < n; j++) {
-                int index = j;
-                int index2 = j + 1;
-                int index3 = j + 2;
-                if (index2 >= n)
-                    index2 -= n;
-                if (index3 >= n)
-                    index3 -= n;
-                int num = Integer.parseInt(sb.append(arr[index]).append(arr[index2]).append(arr[index3]).toString());
+                int num = func(j, m);
                 if (num >= x && num <= y)
-                    result++;
-                sb.setLength(0);
+                    answer++;
             }
-            System.out.println(result);
+            System.out.println(answer);
         }
+    }
+
+    private static int func(int startIndex, int m) {
+        StringBuilder sb = new StringBuilder();
+        int length = arr.length;
+        for (int i = 0; i < m; i++) {
+            if (startIndex == length)
+                startIndex = 0;
+            sb.append(arr[startIndex++]);
+        }
+        return Integer.parseInt(sb.toString());
     }
 }
