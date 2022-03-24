@@ -3,76 +3,78 @@ package baekjoon.gold.gold5;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Deque;
 import java.util.LinkedList;
 
 public class Baekjoon5430 {
 
+    private static StringBuilder sb = new StringBuilder();
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int testCase = Integer.parseInt(br.readLine());
+        int t = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < testCase; i++) {
-            LinkedList<Integer> queue = new LinkedList<>();
-            String str = br.readLine();
-            String[] strArr = str.split("");
-            int n = Integer.parseInt(br.readLine());
-            String number = br.readLine()
-                    .replace("[", "")
-                    .replace("]", "");
-            if (!number.contains(",") && str.contains("D")) {
-                System.out.println("error");
-                continue;
-            } else if (!number.contains(",") && !str.contains("D")) {
-                System.out.println("[]");
-                continue;
-            }
-            String[] num = number.split(",");
-            for (String val : num) {
-                queue.add(Integer.parseInt(val));
-            }
-
-            String location = "first";
-
+        for (int i = 0; i < t; i++) {
+            boolean isFisrt = true;
             boolean bool = false;
+            Deque<Integer> deque = new LinkedList<>();
+            String[] strArr = br.readLine().split("");
+            int n = Integer.parseInt(br.readLine());
+
+            String str = br.readLine();
+            str = str.replace("[", "");
+            str = str.replace("]", "");
+            String[] numbers = str.split(",");
+
+            for (String number : numbers) {
+                if (number.equals(""))
+                    continue;
+                deque.add(Integer.parseInt(number));
+            }
+
             for (String val : strArr) {
-                if (val.equals("R")) {
-                    location = location.equals("first") ? "last" : "first";
-                } else {
-                    if (queue.size() == 0) {
+                if (val.equals("R"))
+                    isFisrt = !isFisrt;
+                else if (val.equals("D")) {
+                    if (deque.isEmpty()) {
+                        sb.append("error").append("\n");
                         bool = true;
                         break;
                     } else {
-                        if (location.equals("first"))
-                            queue.pollFirst();
+                        if (isFisrt)
+                            deque.pollFirst();
                         else
-                            queue.pollLast();
+                            deque.pollLast();
                     }
                 }
             }
-            if (bool) {
-                System.out.println("error");
+
+            if (bool)
+                continue;
+
+            if (deque.isEmpty()) {
+                sb.append("[]").append("\n");
                 continue;
             }
 
-            if (queue.size() == 0) {
-                System.out.println("[]");
-                continue;
-            }
-
-            StringBuilder sb = new StringBuilder();
             sb.append("[");
-            if (location.equals("first")) {
-                while (!queue.isEmpty()) {
-                    sb.append(queue.pollFirst()).append(",");
-                }
-            } else {
-                while (!queue.isEmpty()) {
-                    sb.append(queue.pollLast()).append(",");
+            int size = deque.size();
+            for (int j = 0; j < size; j++) {
+                if (isFisrt) {
+                    if (j == size - 1) {
+                        sb.append(deque.pollFirst()).append("]").append("\n");
+                    } else {
+                        sb.append(deque.pollFirst()).append(",");
+                    }
+                } else {
+                    if (j == size - 1) {
+                        sb.append(deque.pollLast()).append("]").append("\n");
+                    } else {
+                        sb.append(deque.pollLast()).append(",");
+                    }
                 }
             }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.append("]");
-            System.out.println(sb.toString());
         }
+        System.out.println(sb.toString());
     }
 }
