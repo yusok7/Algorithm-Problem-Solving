@@ -80,17 +80,18 @@ public class Baekjoon21610 {
 
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    if (!cloud[i][j])
-                        copy[i][j] = arr[i][j];
-                    else
-                        copy[i][j] = 0;
+                    if (cloud[i][j])
+                        arr[i][j]++;
                 }
             }
+
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                    copy[i][j] = 0;
 
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     if (cloud[i][j] == true) {
-                        arr[i][j] += 1;
                         for (int k = 0; k < 4; k++) {
                             int nx = i + dx2[k];
                             int ny = j + dy2[k];
@@ -99,14 +100,10 @@ public class Baekjoon21610 {
                             if (arr[nx][ny] > 0)
                                 copy[i][j]++;
                         }
-                        copy[i][j] += arr[i][j];
+                        arr[i][j] += copy[i][j];
                     }
                 }
             }
-
-            for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++)
-                    arr[i][j] = copy[i][j];
 
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
