@@ -12,17 +12,11 @@ public class DoIt3 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        int[] arr = new int[n + 1];
         int[] d = new int[n + 1];
 
         st = new StringTokenizer(br.readLine());
-        for (int i = 1; i < n + 1; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            arr[i] = num;
-        }
-
         for (int i = 1; i < n + 1; i++)
-            d[i] = d[i - 1] + arr[i];
+            d[i] = d[i - 1] + Integer.parseInt(st.nextToken());
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < m; i++) {
